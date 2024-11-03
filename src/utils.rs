@@ -1,6 +1,6 @@
 // Utility functions or structs or traits
 
-const EPSILON: f32 = 1.0e-5;
+pub const EPSILON: f32 = 1.0e-5;
 
 pub trait Compare {
     fn eq(self, other: f32) -> bool;

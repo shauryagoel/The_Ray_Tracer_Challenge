@@ -1,3 +1,4 @@
+use crate::utils::EPSILON;
 use crate::Ray;
 use crate::Sphere;
 use crate::Tuple;
@@ -23,6 +24,7 @@ pub struct Computation {
     pub eyev: Tuple,
     pub normalv: Tuple,
     inside: bool,
+    pub over_point: Tuple, // Just slightly above the point towards the normal to avoid `acne`
 }
 
 impl Intersection {
@@ -42,6 +44,8 @@ impl Intersection {
             inside = true;
             normalv = -normalv;
         }
+        // let over_point = point + normalv * EPSILON * 1000.0; // NOTE: why do we need this so large?? To compensate for f32 rounding errors -> use f64
+        let over_point = point + normalv * EPSILON; // NOTE: use this in f32 to pass tests
 
         Computation {
             t: self.t,
@@ -50,6 +54,7 @@ impl Intersection {
             eyev,
             normalv,
             inside,
+            over_point,
         }
     }
 }
@@ -128,8 +133,8 @@ impl std::ops::IndexMut<usize> for Intersections {
 #[cfg(test)]
 mod sphere_tests {
     use super::*;
-    use crate::Ray;
     use crate::{point, vector};
+    use crate::{Matrix, Ray};
 
     #[test]
     fn intersection_creation() {
@@ -245,5 +250,16 @@ mod sphere_tests {
         assert_eq!(comps.eyev, vector(0.0, 0.0, -1.0));
         assert!(comps.inside);
         assert_eq!(comps.normalv, vector(0.0, 0.0, -1.0));
+    }
+
+    #[test]
+    fn hit_should_offset_point() {
+        let r = Ray::new(point(0.0, 0.0, -5.0), vector(0.0, 0.0, 1.0));
+        let mut shape = Sphere::default();
+        shape.set_transform(Matrix::get_translation_matrix(0.0, 0.0, 1.0));
+        let i = Intersection::new(5.0, shape);
+        let comps = i.prepare_computations(&r);
+        assert!(comps.over_point.z < -EPSILON / 2.0);
+        assert!(comps.point.z > comps.over_point.z);
     }
 }

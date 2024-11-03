@@ -17,6 +17,7 @@ Summarize important concepts from the book.
   * [Reflecting vectors](#reflecting-vectors)
   * [The Phong Reflection Model](#the-phong-reflection-model)
 - [Chapter 7](#chapter-7)
+- [Chapter 8](#chapter-8)
 
 <!-- tocstop -->
 
@@ -193,3 +194,12 @@ It is basically the sum of these three reflection components.
 **View Transformation** is a transformation matrix that orients the world relative to the eye.
 
 It is easier to imagine that it moves the eyes not the world.
+
+## Chapter 8
+
+If some point lies in the shadow, then, the diffuse component and the specular component of the Phong reflection model should be 0. As those components depends on the light source.
+
+To find whether a point is in a shadow, we can cast a shadow ray from the point to the light source. If the ray intersects any object in between, then the point is in the shadow.
+
+*Acne*- Due to rounding of floating point numbers, the shadow ray may intersect the same object it is cast from. As a result, it causes the sphere to cast a shadow on its own point of intersection.
+To prevent this, we can move the origin of the shadow ray by a small amount along the normal of the point.

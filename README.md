@@ -6,6 +6,8 @@
 - [Testing](#testing)
 - [Building the binaries](#building-the-binaries)
 - [TODO](#todo)
+- [Renderings](#renderings)
+  * [Spheres with shadows (Chapter 8)](#spheres-with-shadows-chapter-8)
 
 <!-- tocstop -->
 
@@ -40,3 +42,9 @@ cargo run --bin <binary file name without extension>
 - [ ] Use borrowing instead of creating copies to make code efficient
 - [ ] Optimise the matrix class
 - [ ] Reduce unnecessary dependencies between structs and move out ray tracing related functions
+
+## Renderings
+
+### Spheres with shadows (Chapter 8)
+
+![Chapter 8 Rendering](renderings/chapter8_end.jpeg)
