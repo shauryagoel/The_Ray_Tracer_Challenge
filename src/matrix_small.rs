@@ -2,12 +2,12 @@ use crate::Compare;
 
 #[derive(Debug, Default)]
 pub struct Matrix2 {
-    pub data: [[f32; 2]; 2],
+    pub data: [[f64; 2]; 2],
 }
 
 #[derive(Debug, Default)]
 pub struct Matrix3 {
-    pub data: [[f32; 3]; 3],
+    pub data: [[f64; 3]; 3],
 }
 
 impl Matrix2 {
@@ -16,7 +16,7 @@ impl Matrix2 {
         Default::default()
     }
 
-    pub fn determinant(&self) -> f32 {
+    pub fn determinant(&self) -> f64 {
         self[0][0] * self[1][1] - self[0][1] * self[1][0]
     }
 }
@@ -49,19 +49,19 @@ impl Matrix3 {
     }
 
     // Minor is determinant of a submatrix
-    pub fn minor(&self, row_ind: usize, col_ind: usize) -> f32 {
+    pub fn minor(&self, row_ind: usize, col_ind: usize) -> f64 {
         self.submatrix(row_ind, col_ind).determinant()
     }
 
     // Cofactor is minor with possibly a sign depending on row and col index
-    pub fn cofactor(&self, row_ind: usize, col_ind: usize) -> f32 {
-        let sign = (-1_f32).powi((row_ind + col_ind) as i32);
+    pub fn cofactor(&self, row_ind: usize, col_ind: usize) -> f64 {
+        let sign = (-1_f64).powi((row_ind + col_ind) as i32);
         sign * self.minor(row_ind, col_ind)
     }
 
     // Find determinant using cofactors
-    pub fn determinant(&self) -> f32 {
-        let mut result: f32 = 0.0;
+    pub fn determinant(&self) -> f64 {
+        let mut result: f64 = 0.0;
         for i in 0..3 {
             result += self.cofactor(0, i) * self[0][i];
         }
@@ -71,7 +71,7 @@ impl Matrix3 {
 
 // Use this to get a row of matrix when indexing Matrix
 impl std::ops::Index<usize> for Matrix2 {
-    type Output = [f32; 2];
+    type Output = [f64; 2];
 
     fn index(&self, row: usize) -> &Self::Output {
         &self.data[row]
@@ -85,7 +85,7 @@ impl std::ops::IndexMut<usize> for Matrix2 {
 }
 
 impl std::ops::Index<usize> for Matrix3 {
-    type Output = [f32; 3];
+    type Output = [f64; 3];
 
     fn index(&self, row: usize) -> &Self::Output {
         &self.data[row]

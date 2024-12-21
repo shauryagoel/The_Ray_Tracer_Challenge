@@ -6,13 +6,13 @@ use crate::Compare;
 // if we clip at every stage, then the final image would be too dark or too light
 #[derive(Clone, Copy, Debug)]
 pub struct Color {
-    pub red: f32,   // red component of the color
-    pub green: f32, // green component of the color
-    pub blue: f32,  // blue component of the color
+    pub red: f64,   // red component of the color
+    pub green: f64, // green component of the color
+    pub blue: f64,  // blue component of the color
 }
 
 impl Color {
-    pub fn new(red: f32, green: f32, blue: f32) -> Color {
+    pub fn new(red: f64, green: f64, blue: f64) -> Color {
         Color { red, green, blue }
     }
 
@@ -70,16 +70,16 @@ impl PartialEq for Color {
 }
 
 // For color * a
-impl std::ops::Mul<f32> for Color {
+impl std::ops::Mul<f64> for Color {
     type Output = Self;
 
-    fn mul(self, a: f32) -> Self {
+    fn mul(self, a: f64) -> Self {
         Color::new(self.red * a, self.green * a, self.blue * a)
     }
 }
 
 // For a * color
-impl std::ops::Mul<Color> for f32 {
+impl std::ops::Mul<Color> for f64 {
     type Output = Color;
 
     fn mul(self, color: Color) -> Color {

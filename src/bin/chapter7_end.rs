@@ -1,5 +1,5 @@
 use ray_tracer::{point, vector, Camera, Color, Light, Matrix, Sphere, World};
-use std::f32::consts::{FRAC_PI_2, FRAC_PI_3, FRAC_PI_4};
+use std::f64::consts::{FRAC_PI_2, FRAC_PI_3, FRAC_PI_4};
 
 fn main() {
     let mut floor = Sphere::default();

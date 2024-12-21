@@ -1,5 +1,5 @@
 use ray_tracer::{point, Canvas, Color, Matrix};
-use std::f32::consts::PI;
+use std::f64::consts::PI;
 
 // Draw pixels around a circle where hours are present in a clock, center of clock is center of canvas
 fn main() {
@@ -7,8 +7,8 @@ fn main() {
     let hour_color = Color::white();
 
     let translate_to_canvas_centre = Matrix::get_translation_matrix(
-        (canvas.width as f32) / 2.0,
-        (canvas.height as f32) / 2.0,
+        (canvas.width as f64) / 2.0,
+        (canvas.height as f64) / 2.0,
         0.0,
     );
 

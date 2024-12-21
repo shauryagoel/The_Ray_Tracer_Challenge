@@ -84,8 +84,8 @@ impl Canvas {
     }
 
     // Scales the color value and clip between 0 and 255
-    fn scale_and_clip_color(&self, color_value: f32) -> u8 {
-        (color_value * 255_f32).clamp(0.0, 255.0).round() as u8
+    fn scale_and_clip_color(&self, color_value: f64) -> u8 {
+        (color_value * 255_f64).clamp(0.0, 255.0).round() as u8
     }
 }
 

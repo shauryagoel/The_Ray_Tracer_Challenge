@@ -12,7 +12,7 @@ impl Ray {
     }
 
     // Computes new position of ray after time `t`
-    pub fn position(&self, t: f32) -> Tuple {
+    pub fn position(&self, t: f64) -> Tuple {
         self.origin + self.direction * t
     }
 

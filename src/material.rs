@@ -4,14 +4,14 @@ use crate::{Color, Tuple};
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Material {
     pub color: Color,
-    pub ambient: f32,   // 0.0 to 1.0
-    pub diffuse: f32,   // 0.0 to 1.0
-    pub specular: f32,  // 0.0 to 1.0
-    pub shininess: f32, // usally between 10.0 (very large highlight) to 200.0 (very small highlight)
+    pub ambient: f64,   // 0.0 to 1.0
+    pub diffuse: f64,   // 0.0 to 1.0
+    pub specular: f64,  // 0.0 to 1.0
+    pub shininess: f64, // usally between 10.0 (very large highlight) to 200.0 (very small highlight)
 }
 
 impl Material {
-    pub fn new(color: Color, ambient: f32, diffuse: f32, specular: f32, shininess: f32) -> Self {
+    pub fn new(color: Color, ambient: f64, diffuse: f64, specular: f64, shininess: f64) -> Self {
         Self {
             color,
             ambient,
@@ -62,7 +62,7 @@ impl Default for Material {
 mod material_tests {
     use super::*;
     use crate::{point, vector};
-    use std::f32::consts::FRAC_1_SQRT_2;
+    use std::f64::consts::FRAC_1_SQRT_2;
 
     #[test]
     fn material_default() {
@@ -119,7 +119,7 @@ mod material_tests {
         let light = Light::new(point(0.0, 10.0, -10.0), Color::new(1.0, 1.0, 1.0));
         let in_shadow = false;
         let result = m.lighting(light, position, eyev, normalv, in_shadow);
-        assert_eq!(result, Color::new(1.6363853, 1.6363853, 1.6363853));
+        assert_eq!(result, Color::new(1.636396, 1.636396, 1.636396));
     }
 
     #[test]

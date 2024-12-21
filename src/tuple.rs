@@ -2,23 +2,23 @@ use crate::Compare;
 
 #[derive(Clone, Copy, Debug)]
 pub struct Tuple {
-    pub x: f32, // x coordinate of the Tuple
-    pub y: f32, // y coordinate of the Tuple
-    pub z: f32, // z coordinate of the Tuple
-    pub w: f32, // indicator whether the Tuple is a vector(w=0.0) or a point(w=1.0). It is float as we need it for computation rather than an actual indicator
+    pub x: f64, // x coordinate of the Tuple
+    pub y: f64, // y coordinate of the Tuple
+    pub z: f64, // z coordinate of the Tuple
+    pub w: f64, // indicator whether the Tuple is a vector(w=0.0) or a point(w=1.0). It is float as we need it for computation rather than an actual indicator
 }
 
 // Factory methods for creating vector and point
-pub fn vector(x: f32, y: f32, z: f32) -> Tuple {
+pub fn vector(x: f64, y: f64, z: f64) -> Tuple {
     Tuple::new(x, y, z, 0.0)
 }
 
-pub fn point(x: f32, y: f32, z: f32) -> Tuple {
+pub fn point(x: f64, y: f64, z: f64) -> Tuple {
     Tuple::new(x, y, z, 1.0)
 }
 
 impl Tuple {
-    pub fn new(x: f32, y: f32, z: f32, w: f32) -> Self {
+    pub fn new(x: f64, y: f64, z: f64, w: f64) -> Self {
         Self { x, y, z, w }
     }
 
@@ -31,7 +31,7 @@ impl Tuple {
     }
 
     // Pythagoras theorem
-    pub fn magnitude(&self) -> f32 {
+    pub fn magnitude(&self) -> f64 {
         (self.x * self.x + self.y * self.y + self.z * self.z + self.w * self.w).sqrt()
     }
 
@@ -41,7 +41,7 @@ impl Tuple {
     }
 
     // Dot product of 2 vectors
-    pub fn dot(&self, other: &Self) -> f32 {
+    pub fn dot(&self, other: &Self) -> f64 {
         self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w
     }
 
@@ -105,16 +105,16 @@ impl std::ops::Neg for Tuple {
 }
 
 // For tuple * scalar
-impl std::ops::Mul<f32> for Tuple {
+impl std::ops::Mul<f64> for Tuple {
     type Output = Self;
 
-    fn mul(self, a: f32) -> Self {
+    fn mul(self, a: f64) -> Self {
         Self::new(self.x * a, self.y * a, self.z * a, self.w * a)
     }
 }
 
 // For scalar * tuple
-impl std::ops::Mul<Tuple> for f32 {
+impl std::ops::Mul<Tuple> for f64 {
     type Output = Tuple;
 
     fn mul(self, a: Tuple) -> Tuple {
@@ -123,10 +123,10 @@ impl std::ops::Mul<Tuple> for f32 {
 }
 
 // For tuple / scalar
-impl std::ops::Div<f32> for Tuple {
+impl std::ops::Div<f64> for Tuple {
     type Output = Self;
 
-    fn div(self, a: f32) -> Self {
+    fn div(self, a: f64) -> Self {
         Self::new(self.x / a, self.y / a, self.z / a, self.w / a)
     }
 }
@@ -134,7 +134,7 @@ impl std::ops::Div<f32> for Tuple {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f32::consts::FRAC_1_SQRT_2;
+    use std::f64::consts::FRAC_1_SQRT_2;
 
     #[test]
     fn point_validity() {
@@ -261,13 +261,13 @@ mod tests {
     #[test]
     fn vector_magnitude4() {
         let v = vector(1.0, 2.0, 3.0);
-        assert_eq!(v.magnitude(), f32::sqrt(14.0));
+        assert_eq!(v.magnitude(), f64::sqrt(14.0));
     }
 
     #[test]
     fn vector_magnitude5() {
         let v = vector(-1.0, -2.0, -3.0);
-        assert_eq!(v.magnitude(), f32::sqrt(14.0));
+        assert_eq!(v.magnitude(), f64::sqrt(14.0));
     }
 
     #[test]

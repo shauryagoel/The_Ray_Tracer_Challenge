@@ -6,7 +6,7 @@ const MATRIX_SIZE: usize = 4;
 
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Matrix {
-    data: [[f32; MATRIX_SIZE]; MATRIX_SIZE], // TODO: create this into 1D array to increase performance
+    data: [[f64; MATRIX_SIZE]; MATRIX_SIZE], // TODO: create this into 1D array to increase performance
 }
 
 impl Matrix {
@@ -58,19 +58,19 @@ impl Matrix {
     }
 
     // Minor is determinant of a submatrix
-    pub fn minor(&self, row_ind: usize, col_ind: usize) -> f32 {
+    pub fn minor(&self, row_ind: usize, col_ind: usize) -> f64 {
         self.submatrix(row_ind, col_ind).determinant()
     }
 
     // Cofactor is minor with possibly a sign depending on row and col index
-    pub fn cofactor(&self, row_ind: usize, col_ind: usize) -> f32 {
-        let sign = (-1_f32).powi((row_ind + col_ind) as i32);
+    pub fn cofactor(&self, row_ind: usize, col_ind: usize) -> f64 {
+        let sign = (-1_f64).powi((row_ind + col_ind) as i32);
         sign * self.minor(row_ind, col_ind)
     }
 
     // Find determinant using cofactors
-    pub fn determinant(&self) -> f32 {
-        let mut result: f32 = 0.0;
+    pub fn determinant(&self) -> f64 {
+        let mut result: f64 = 0.0;
         for i in 0..MATRIX_SIZE {
             result += self.cofactor(0, i) * self[0][i];
         }
@@ -99,7 +99,7 @@ impl Matrix {
 
 // Use this to get a row of matrix when indexing Matrix
 impl std::ops::Index<usize> for Matrix {
-    type Output = [f32; MATRIX_SIZE];
+    type Output = [f64; MATRIX_SIZE];
 
     fn index(&self, row: usize) -> &Self::Output {
         &self.data[row]

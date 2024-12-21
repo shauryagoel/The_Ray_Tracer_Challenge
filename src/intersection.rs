@@ -6,7 +6,7 @@ use crate::Tuple;
 // Store data for ray intersection with a object in the scene
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Intersection {
-    pub t: f32,         // At what time hit occured
+    pub t: f64,         // At what time hit occured
     pub object: Sphere, // TODO: use dynamic data type
 }
 
@@ -18,7 +18,7 @@ pub struct Intersections {
 
 // Store some precomputations for the intersection
 pub struct Computation {
-    t: f32,
+    t: f64,
     pub object: Sphere,
     pub point: Tuple,
     pub eyev: Tuple,
@@ -28,7 +28,7 @@ pub struct Computation {
 }
 
 impl Intersection {
-    pub fn new(t: f32, object: Sphere) -> Self {
+    pub fn new(t: f64, object: Sphere) -> Self {
         Self { t, object }
     }
 
@@ -44,8 +44,8 @@ impl Intersection {
             inside = true;
             normalv = -normalv;
         }
-        // let over_point = point + normalv * EPSILON * 1000.0; // NOTE: why do we need this so large?? To compensate for f32 rounding errors -> use f64
-        let over_point = point + normalv * EPSILON; // NOTE: use this in f32 to pass tests
+        // let over_point = point + normalv * EPSILON * 1000.0; // NOTE: why do we need this so large?? To compensate for f64 rounding errors -> use f64
+        let over_point = point + normalv * EPSILON; // NOTE: use this in f64 to pass tests
 
         Computation {
             t: self.t,

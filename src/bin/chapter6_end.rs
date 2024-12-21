@@ -1,5 +1,5 @@
 use ray_tracer::{point, Canvas, Color, Light, Material, Ray, Sphere};
-// use std::f32::consts::PI;
+// use std::f64::consts::PI;
 
 // shading routine of a sphere on a canvas located at `canvas_z` parallel to the `xy` axis
 // Ray is cast from the -ve z coordinate towards the canvas
@@ -7,7 +7,7 @@ use ray_tracer::{point, Canvas, Color, Light, Material, Ray, Sphere};
 // If it hits the sphere, then, we calcuate the color based on the `Phong reflection model` and draw it on canvas
 fn main() {
     let canvas_size: usize = 600; // in pixels
-    let canvas_z: f32 = 400.0;
+    let canvas_z: f64 = 400.0;
     let ray_origin = point(0.0, 0.0, -2.0); // Basically eye position
     let light = Light::new(point(-10.0, 10.0, -10.0), Color::new(1.0, 1.0, 1.0));
     let m: Material = Material {
@@ -31,7 +31,7 @@ fn main() {
     let half_width: i32 = (canvas_size as i32) / 2;
     for x in -half_width..half_width {
         for y in (-half_width + 1)..=half_width {
-            let ray_direction = point(x as f32, y as f32, canvas_z) - ray_origin;
+            let ray_direction = point(x as f64, y as f64, canvas_z) - ray_origin;
             let r = Ray::new(ray_origin, ray_direction.normalize());
 
             let xs = s.intersect(r);

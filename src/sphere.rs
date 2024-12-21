@@ -7,13 +7,13 @@ use crate::{Intersection, Intersections};
 pub struct Sphere {
     // TODO: add `id` to it as described in the book
     center: Tuple,
-    radius: f32,
+    radius: f64,
     transform: Matrix,  // Transformation matrix
     pub material: Material, // Material of the sphere
 }
 
 impl Sphere {
-    pub fn new(center: Tuple, radius: f32, transform: Matrix, material: Material) -> Self {
+    pub fn new(center: Tuple, radius: f64, transform: Matrix, material: Material) -> Self {
         Self {
             center,
             radius,
@@ -78,7 +78,7 @@ impl Default for Sphere {
 mod sphere_tests {
     use super::*;
     use crate::vector;
-    use std::f32::consts::{FRAC_1_SQRT_2, PI};
+    use std::f64::consts::{FRAC_1_SQRT_2, PI};
 
     #[test]
     fn sphere_ray_intersection1() {
@@ -196,7 +196,7 @@ mod sphere_tests {
     #[test]
     fn sphere_normal_at_non_axial_point() {
         let s: Sphere = Default::default();
-        let val: f32 = f32::sqrt(3.0) / 3.0;
+        let val: f64 = f64::sqrt(3.0) / 3.0;
         let n = s.normal_at(point(val, val, val));
         assert_eq!(n, vector(val, val, val));
     }
@@ -204,7 +204,7 @@ mod sphere_tests {
     #[test]
     fn sphere_normal_is_normalized() {
         let s: Sphere = Default::default();
-        let val: f32 = f32::sqrt(3.0) / 3.0;
+        let val: f64 = f64::sqrt(3.0) / 3.0;
         let n = s.normal_at(point(val, val, val));
         assert_eq!(n, n.normalize());
     }

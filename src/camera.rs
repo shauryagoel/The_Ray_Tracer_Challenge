@@ -10,25 +10,25 @@ use crate::World;
 pub struct Camera {
     hsize: u16,            // Horizontal size in pixels of the canvas
     vsize: u16,            // Vertical size in pixels of the canvas
-    field_of_view: f32,    // An angle that describes how much the camera can see
+    field_of_view: f64,    // An angle that describes how much the camera can see
     pub transform: Matrix, // Transformation matrix that describes how the world is moved relative to the camera (is a view transform)
-    aspect: f32,           // Ascpect ratio of the canvas
-    half_width: f32,       // Just half of the width of the canvas
-    half_height: f32,      // Just half of the height of the canvas
-    pixel_size: f32,       // Size of a single pixel
+    aspect: f64,           // Ascpect ratio of the canvas
+    half_width: f64,       // Just half of the width of the canvas
+    half_height: f64,      // Just half of the height of the canvas
+    pixel_size: f64,       // Size of a single pixel
 }
 
 impl Camera {
-    pub fn new(hsize: u16, vsize: u16, field_of_view: f32) -> Camera {
-        let half_view = f32::tan(field_of_view / 2.0);
-        let aspect = hsize as f32 / vsize as f32;
+    pub fn new(hsize: u16, vsize: u16, field_of_view: f64) -> Camera {
+        let half_view = f64::tan(field_of_view / 2.0);
+        let aspect = hsize as f64 / vsize as f64;
         let (mut half_width, mut half_height) = (half_view, half_view);
         if aspect >= 1.0 {
             half_height = half_view / aspect;
         } else {
             half_width = half_view * aspect;
         }
-        let pixel_size = (half_width * 2.0) / hsize as f32;
+        let pixel_size = (half_width * 2.0) / hsize as f64;
 
         Camera {
             hsize,
@@ -46,8 +46,8 @@ impl Camera {
     /// Camera is at origin and canvas is at (0, 0, -1)
     pub fn ray_for_pixel(&self, x: u16, y: u16) -> Ray {
         // Get the pixel center
-        let xoffset = (x as f32 + 0.5) * self.pixel_size;
-        let yoffset = (y as f32 + 0.5) * self.pixel_size;
+        let xoffset = (x as f64 + 0.5) * self.pixel_size;
+        let yoffset = (y as f64 + 0.5) * self.pixel_size;
 
         // Change pixel coordinates to world coordinates
         let world_x = self.half_width - xoffset;
@@ -81,7 +81,7 @@ impl Camera {
 mod camera_test {
     use super::*;
     use crate::{vector, Color};
-    use std::f32::consts::{FRAC_1_SQRT_2, FRAC_PI_2, FRAC_PI_4};
+    use std::f64::consts::{FRAC_1_SQRT_2, FRAC_PI_2, FRAC_PI_4};
 
     #[test]
     fn constructing_camera() {
