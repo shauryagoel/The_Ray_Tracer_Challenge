@@ -1,3 +1,4 @@
+use ray_tracer::Shape;
 use ray_tracer::{point, Canvas, Color, Light, Material, Ray, Sphere};
 // use std::f64::consts::PI;
 

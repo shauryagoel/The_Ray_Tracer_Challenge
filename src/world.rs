@@ -1,6 +1,7 @@
 use crate::Light;
 use crate::Matrix;
 use crate::Ray;
+use crate::Shape;
 use crate::Sphere;
 use crate::Tuple;
 use crate::{point, Color};

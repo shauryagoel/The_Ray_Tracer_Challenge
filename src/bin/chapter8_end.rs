@@ -1,3 +1,4 @@
+use ray_tracer::Shape;
 use ray_tracer::{point, vector, Camera, Color, Light, Matrix, Sphere, World};
 use std::f64::consts::{FRAC_PI_2, FRAC_PI_3, FRAC_PI_4};
 
