@@ -6,6 +6,7 @@ mod light;
 mod material;
 mod matrix;
 mod matrix_small;
+mod plane;
 mod projectile;
 mod ray;
 mod shape;
